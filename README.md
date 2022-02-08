@@ -13,7 +13,7 @@ Download the prebuilt example demo here: [https://github.com/zhuah/uikit/release
 As my development OS is macOS, there may some bugs on linux and windows.
 
 I have worked on it for almost 3 years.
-For some reason, i'm looking for financial support or business cooperation on this project.
+For some reason, i'm looking for financial support or business cooperation or acquisition on this project.
 
 To contact me please send email to [zzhuah@outlook.com](mailto:zzhuah@outlook.com).
 
