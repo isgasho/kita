@@ -1,0 +1,35 @@
+#pkg {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow: auto;
+
+  > #dialog-actions {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    > .dialog-action {
+      margin-right: 10px;
+    }
+  }
+
+  > textarea {
+    width: 100%;
+    font-family: "Source Code Pro";
+    margin-top: 5px;
+    padding: 16px;
+    flex: 1;
+
+    &:hover,
+    &:focus,
+    &:drop(valid) {
+      border-color: #3030e0;
+    }
+
+    &:drop(invalid) {
+      border-color: red;
+    }
+  }
+}

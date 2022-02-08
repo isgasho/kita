@@ -1,0 +1,68 @@
+#pkg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  .filetree {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: auto;
+    border-right: 1px solid black;
+    padding: 0 10px;
+    min-width: 250px;
+    max-width: 300px;
+
+    .item {
+      padding: 4px;
+
+      &:hover {
+        background-color: #eeeeeeaa;
+      }
+
+      &.is-selected {
+        background-color: dodgerblue;
+
+        > label {
+          color: white;
+        }
+      }
+    }
+
+    i.state {
+      width: 16px;
+      content-align: center;
+      transform-origin: center;
+      transition-property: transform;
+      transition-duration: 0.5s;
+
+      &.is-open {
+        transform: rotate(90deg);
+      }
+    }
+
+    label {
+      text-wrap: nowrap;
+    }
+
+    label.is-dir {
+      margin-left: 8px;
+    }
+
+    label:not(.is-dir) {
+      margin-left: 24px;
+    }
+  }
+
+  span {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    padding: 8px;
+    font-family: "Source Code Pro";
+    &:not(.file-selected) {
+      content-align: center;
+      font-size: 2em;
+    }
+  }
+}

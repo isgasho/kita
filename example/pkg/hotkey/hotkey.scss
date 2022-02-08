@@ -1,0 +1,15 @@
+#pkg {
+  display: flex;
+  flex-direction: column;
+
+  #actions {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 10px;
+
+    > button {
+      margin-right: 10px;
+    }
+  }
+}

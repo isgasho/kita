@@ -1,0 +1,69 @@
+#pkg {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+
+  > spacer {
+    width: 1px;
+    height: 100%;
+    background-color: black;
+  }
+
+  > popup-container {
+    flex: 1;
+    height: 100%;
+  }
+
+  .tooltip-trigger {
+    margin: 8px;
+  }
+
+  div.panel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    overflow: auto;
+  }
+  label {
+    text-wrap: nowrap;
+  }
+  .confirm-panel,
+  .dialog {
+    width: 50%;
+    height: 50%;
+    stack-align-self: center;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .confirm-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .dialog {
+      width: 100%;
+      height: 90%;
+    }
+  }
+
+  .notification {
+    margin: 5px;
+    padding: 5px;
+    background-color: gray;
+    border-radius: 3px;
+    stack-align-self: top right;
+  }
+
+  .tooltip {
+    content-align: center;
+    padding: 4px 6px;
+    background-color: gray;
+    border-radius: 3px;
+  }
+}

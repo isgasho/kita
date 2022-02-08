@@ -1,0 +1,10 @@
+div {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  align-items: flex-start;
+
+  > :not(:first-child) {
+    margin-top: 1em;
+  }
+}

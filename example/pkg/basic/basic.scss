@@ -1,0 +1,82 @@
+#pkg {
+  padding: 10px;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  flex-direction: column;
+
+  #nav {
+    flex-wrap: wrap;
+
+    > a {
+      text-decoration: none;
+      border-radius: 4px;
+      color: black;
+      padding: 6px;
+      cursor: pointer;
+
+      background-color: #eeeeee;
+
+      &:hover {
+        background-color: darkgrey;
+      }
+
+      &:not(:first-child) {
+        margin-left: 10px;
+      }
+    }
+
+    padding-bottom: 4px;
+    border-bottom: 1px solid #aaaaaa;
+  }
+
+  #content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: auto;
+    flex: 1;
+
+    .item {
+      padding: 10px;
+      align-items: center;
+
+      > div {
+        align-items: baseline;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #aaaaaa;
+      }
+
+      > label:first-child {
+        min-width: 5em;
+        content-align: right center;
+        margin-right: 10px;
+      }
+
+      > div.checkbox,
+      > div.radio {
+        > label {
+          margin-left: 4px;
+          margin-right: 1em;
+        }
+      }
+
+      a,
+      select {
+        &:not(:last-child) {
+          margin-right: 1em;
+        }
+      }
+
+      radio.ring:checked {
+        --ring-color: #0075ff;
+
+        border-top-color: var(--ring-color);
+        background-color: var(--ring-color);
+        color: white;
+      }
+    }
+  }
+}

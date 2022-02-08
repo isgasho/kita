@@ -1,0 +1,10 @@
+div {
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+  align-items: flex-start;
+
+  > button {
+    margin-top: 10px;
+  }
+}

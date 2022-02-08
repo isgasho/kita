@@ -1,0 +1,7 @@
+app:
+  name: example
+  entry: cmd/app
+android:
+  moduleDir: android
+build:
+  features:

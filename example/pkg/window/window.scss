@@ -1,0 +1,83 @@
+#pkg {
+  flex-direction: column;
+  align-items: flex-start;
+
+  button {
+    margin: 10px;
+  }
+}
+
+#dynamic-size {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  input {
+    border: 0 none;
+    outline: none;
+  }
+
+  > input,
+  > #dropdown > .dropdown-item {
+    height: 40px;
+    width: 100%;
+    content-align: left center;
+
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  > #dropdown {
+    display: flex;
+    flex-direction: column;
+
+    max-height: 400px;
+    overflow-y: auto;
+
+    > .dropdown-item {
+      border-top: 1px solid black;
+
+      &:hover {
+        background-color: lightgray;
+      }
+    }
+  }
+}
+
+#size-limit {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    margin: 10px;
+  }
+}
+
+#transparent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  .panel {
+    flex: 1;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+
+    .form {
+      flex-direction: column;
+
+      input {
+        border: 1px solid black;
+        border-radius: 3px;
+        width: 200px;
+        height: 40px;
+        content-align: left center;
+        padding: 5px;
+      }
+    }
+  }
+}
