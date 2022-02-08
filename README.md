@@ -8,8 +8,12 @@ Inspired by Flutter, React.
 The toolkit is almost ready for create apps, but still have many improvements need to be done, such as accessibility
 texture view, web view, and so on...
 
-I have worked on it for almost 3 years(2.5 years fulltime).
+Download the prebuilt example demo here: [https://github.com/zhuah/uikit/releases/download/v0.0.1/macos_linux_windows.tgz]()
+As my development OS is macOS, there may some bugs on linux and windows.
+
+I have worked on it for almost 3 years.
 For some reason, i'm looking for financial support or business cooperation on this project.
+
 To contact me please send email to [zzhuah@outlook.com](mailto:zzhuah@outlook.com).
 
 # Language
