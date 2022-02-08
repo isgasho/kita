@@ -46,7 +46,7 @@ some drawbacks:
 
 # Features
 
-UIKit = React + Hooks + DOM + Gestures + CSS + Animation + Text + Fonts + Canvas + GPU Acceleration + Platform Shell + Assets + I18N + Plugins + DevTool + ...
+UIKit = React + Hooks + DOM + Gestures + CSS + Animation + Text Layout + Fonts + Canvas + GPU Acceleration + Platform Shell + Assets + I18N + Plugins + DevTool + ...
 
 ## Widget/Component
 
