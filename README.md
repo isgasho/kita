@@ -3,6 +3,10 @@
 UIKit is a declarative, reactive GUI toolkit for build cross platform apps with web technology with single codebase.
 Inspired by Flutter, React.
 
+**Note**
+
+I'm sorry if the project name confused you, it was named for development when i start it years ago when i know nothing about apple dev, and it will have a new name when it get to be open sourced.
+
 # Status
 
 The toolkit is almost ready for create apps, but still have many improvements need to be done, such as accessibility
@@ -19,7 +23,7 @@ To contact me please send email to [zzhuah@outlook.com](mailto:zzhuah@outlook.co
 
 # Screenshots
 
-![1.png](./example/imgs/1.png)
+![1.png](./imgs/1.png)
 
 # Language
 
