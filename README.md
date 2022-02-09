@@ -1,18 +1,14 @@
-# UIKit
+# Kita
 
-UIKit is a declarative, reactive GUI toolkit for build cross platform apps with web technology with single codebase.
+Kita is a declarative, reactive GUI toolkit for build cross platform apps with web technology with single codebase.
 Inspired by Flutter, React.
-
-**Note**
-
-I'm sorry if the project name confused you, it was named for development when i start it years ago when i know nothing about apple dev, and it will have a new name when it get to be open sourced.
 
 # Status
 
 The toolkit is almost ready for create apps, but still have many improvements need to be done, such as accessibility
 texture view, web view, and so on...
 
-Download the prebuilt example demo here: [https://github.com/zhuah/uikit/releases/download/v0.0.1/macos_linux_windows.tgz]().
+Download the prebuilt example demo here: [https://github.com/zhuah/kit/releases/download/v0.0.1/macos_linux_windows.tgz]().
 
 As my development OS is macOS, there may some bugs on linux and windows.
 
@@ -28,7 +24,7 @@ To contact me please send email to [zzhuah@outlook.com](mailto:zzhuah@outlook.co
 
 # Language
 
-UIKit is written in Go for several reasons:
+Kita is written in Go for several reasons:
 
 - Simple and easy to learn and use
 - Memory safe
@@ -51,7 +47,7 @@ some drawbacks:
 
 # Features
 
-UIKit = React + Hooks + DOM + Gestures + CSS + Animation + Text Layout + Fonts + Canvas + GPU Acceleration + Platform Shell + Assets + I18N + Plugins + DevTool + ...
+Kita = React + Hooks + DOM + Gestures + CSS + Animation + Text Layout + Fonts + Canvas + GPU Acceleration + Platform Shell + Assets + I18N + Plugins + DevTool + ...
 
 ## Widget/Component
 
@@ -113,7 +109,7 @@ Builtin gestures:
 
 ## Style/CSS
 
-UIKit implements a custom css styler supports:
+Kita implements a custom css styler supports:
 
 - hot reload with devtool
 - importing
@@ -294,7 +290,7 @@ Todo:
 
 ## Plugins
 
-UIKit provides a general api to call system capabilities by implement plugins.
+Kita provides a general api to call system capabilities by implement plugins.
 
 Here are some builtin plugins:
 
@@ -311,11 +307,11 @@ Here are some builtin plugins:
 
 # Painting
 
-UIKit finally chooses to build it's own canvas drawing engine,instead of relies on Skia or platform drawing api.
+Kita finally chooses to build it's own canvas drawing engine,instead of relies on Skia or platform drawing api.
 
 ## Canvas
 
-UIKit implements a gpu based canvas drawing engine, with merge and batching draw calls
+Kita implements a gpu based canvas drawing engine, with merge and batching draw calls
 to improve performance.
 
 ## GPU Acceleration
@@ -334,7 +330,7 @@ Todo:
 
 ## Fonts
 
-UIKit uses different font stack on each platform
+Kita uses different font stack on each platform
 
 - macOS/iOS: CoreText everywhere
   - font shaping
@@ -362,15 +358,15 @@ Tested with the example app on my old mid 2015 mbp, the average duration per fra
 
 # Assets
 
-UIKit provides a default asset bundler in command line tool, each platform shell implements the api to load asset file, the core asset api implements a asset variant resolver support dpi like `1.0x, 1.5x, 2.0x, ldpi, mdpi, hdpi` and language.
+Kita provides a default asset bundler in command line tool, each platform shell implements the api to load asset file, the core asset api implements a asset variant resolver support dpi like `1.0x, 1.5x, 2.0x, ldpi, mdpi, hdpi` and language.
 
 # I18n
 
-UIKit provides first-class i18n support. You could use react hooks to translate the message and passed the translated text to dom element.
+Kita provides first-class i18n support. You could use react hooks to translate the message and passed the translated text to dom element.
 
 # DevTool
 
-UIKit provides a basic component/dom tree inspector like Chrome DevTool Inspector, which helps debugging style/layout issues.
+Kita provides a basic component/dom tree inspector like Chrome DevTool Inspector, which helps debugging style/layout issues.
 
 # TODO
 
