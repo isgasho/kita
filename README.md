@@ -24,6 +24,7 @@ To contact me please send email to [zzhuah@outlook.com](mailto:zzhuah@outlook.co
 # Screenshots
 
 ![1.png](./imgs/1.png)
+![2.png](./imgs/2.png)
 
 # Language
 
