@@ -1,6 +1,13 @@
 app:
+  id: com.uiez.uikit.example
   name: example
   entry: cmd/app
+  icon: icons/icon.png
+  version: 0.0.1+build1
+  displayName: Example
+  description: UIKit Example
+  company: uiez
+  copyright: uiez
 android:
   moduleDir: android
 build:

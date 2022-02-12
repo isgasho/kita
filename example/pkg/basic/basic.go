@@ -131,29 +131,30 @@ func buildItems(node corewidget.ComponentNode,
 	}
 }
 
-var App = corewidget.Component("Basic",
-	func(node corewidget.ComponentNode) corewidget.Widget {
-		checkboxState := corewidget.UseRef(node, corebase.SortedStrings{})
-		radioSeq := corewidget.UseValue(node, 0)
-		selectValue := corewidget.UseValue(node, "")
-		items := buildItems(node, checkboxState, radioSeq, selectValue)
-		return dom.Style(corebase.PkgFile("basic.scss"))(
-			dom.Div(dom.Id("pkg")).Compose(func(emit corewidget.ComposeEmitFunc) {
-				dom.Div(dom.Id("nav")).Compose(func(emit corewidget.ComposeEmitFunc) {
-					for _, item := range items {
-						dom.Anchor(dom.AnchorText(item.Name), dom.AnchorHref("#"+item.Name)).Emit(emit)
-					}
-				}).Emit(emit)
+var App = corewidget.Component("Basic", func(node corewidget.ComponentNode) corewidget.Widget {
+	checkboxState := corewidget.UseRef(node, corebase.SortedStrings{})
+	radioSeq := corewidget.UseValue(node, 0)
+	selectValue := corewidget.UseValue(node, "")
+	items := buildItems(node, checkboxState, radioSeq, selectValue)
 
-				dom.Div(dom.Id("content")).Compose(func(emit corewidget.ComposeEmitFunc) {
-					for _, item := range items {
-						dom.Div(dom.Id(item.Name), dom.Class("item")).Children(
-							dom.Label(dom.LabelText(item.Name)),
-							item.Content,
-						).Emit(emit)
-					}
-				}).Emit(emit)
-			}),
-		)
-	},
-)
+	stylesheets := dom.UseStylesheet(node, corebase.PkgFile("basic.scss"))
+	return dom.Div(
+		dom.Stylesheets(stylesheets),
+		dom.Id("pkg"),
+	).Compose(func(emit corewidget.ComposeEmitFunc) {
+		dom.Div(dom.Id("nav")).Compose(func(emit corewidget.ComposeEmitFunc) {
+			for _, item := range items {
+				dom.Anchor(dom.AnchorText(item.Name), dom.AnchorHref("#"+item.Name)).Emit(emit)
+			}
+		}).Emit(emit)
+
+		dom.Div(dom.Id("content")).Compose(func(emit corewidget.ComposeEmitFunc) {
+			for _, item := range items {
+				dom.Div(dom.Id(item.Name), dom.Class("item")).Children(
+					dom.Label(dom.LabelText(item.Name)),
+					item.Content,
+				).Emit(emit)
+			}
+		}).Emit(emit)
+	})
+})

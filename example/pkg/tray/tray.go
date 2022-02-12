@@ -216,16 +216,16 @@ var _TrayWindow = corewidget.Component("TrayWindow", func(node corewidget.Compon
 		w.SetVisible(false)
 	}
 
-	return dom.Style(corebase.PkgFile("window.scss"))(
-		dom.Div(
-			dom.OnWindowShortcut(func() []coreevent.Shortcut {
-				return []coreevent.Shortcut{{Key: coreevent.KeyEscape}}
-			}, func(ctx coreevent.PropagateContext, shortcut coreevent.Shortcut) {
-				w, _ := coreui.GetModule[*app.Window](node.View())
-				w.SetVisible(false)
-			}),
-		).Children(dom.Span(dom.SpanText("popup window here"))),
-	)
+	stylesheets := dom.UseStylesheet(node, corebase.PkgFile("window.scss"))
+	return dom.Div(
+		dom.Stylesheets(stylesheets),
+		dom.OnWindowShortcut(func() []coreevent.Shortcut {
+			return []coreevent.Shortcut{{Key: coreevent.KeyEscape}}
+		}, func(ctx coreevent.PropagateContext, shortcut coreevent.Shortcut) {
+			w, _ := coreui.GetModule[*app.Window](node.View())
+			w.SetVisible(false)
+		}),
+	).Children(dom.Span(dom.SpanText("popup window here")))
 })
 
 var App = corewidget.Component("Tray", func(node corewidget.ComponentNode) corewidget.Widget {
@@ -255,26 +255,25 @@ var App = corewidget.Component("Tray", func(node corewidget.ComponentNode) corew
 		}
 		return "enable"
 	}
-	return dom.Style(corebase.PkgFile("tray.scss"))(
-		dom.Div().Children(
-			dom.Span(dom.SpanText(strings.Join(text, "\n"))),
+	stylesheets := dom.UseStylesheet(node, corebase.PkgFile("tray.scss"))
+	return dom.Div(dom.Stylesheets(stylesheets)).Children(
+		dom.Span(dom.SpanText(strings.Join(text, "\n"))),
 
-			dom.Button(
-				dom.OnTap(func(ele coredom.Element, details recognizers.TapDetails) {
-					as.randTrayColor()
-				}),
-			).Child(dom.Label(dom.LabelText("rand tray color"))),
-			dom.Button(
-				dom.OnTap(func(ele coredom.Element, details recognizers.TapDetails) {
-					as.chooseTrayIcon()
-				}),
-			).Child(dom.Label(dom.LabelText("choose tray icon"))),
+		dom.Button(
+			dom.OnTap(func(ele coredom.Element, details recognizers.TapDetails) {
+				as.randTrayColor()
+			}),
+		).Child(dom.Label(dom.LabelText("rand tray color"))),
+		dom.Button(
+			dom.OnTap(func(ele coredom.Element, details recognizers.TapDetails) {
+				as.chooseTrayIcon()
+			}),
+		).Child(dom.Label(dom.LabelText("choose tray icon"))),
 
-			dom.Button(
-				dom.OnTap(func(ele coredom.Element, details recognizers.TapDetails) {
-					as.toggleTray()
-				}),
-			).Child(dom.Label(dom.LabelText(enableOrDisable(as.trayItem != nil)+" tray"))),
-		),
+		dom.Button(
+			dom.OnTap(func(ele coredom.Element, details recognizers.TapDetails) {
+				as.toggleTray()
+			}),
+		).Child(dom.Label(dom.LabelText(enableOrDisable(as.trayItem != nil)+" tray"))),
 	)
 })

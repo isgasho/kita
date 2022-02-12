@@ -188,11 +188,10 @@ func buildItems(buttons []buttonItem) []corewidget.Widget {
 
 var App = corewidget.Component("Popup", func(node corewidget.ComponentNode) corewidget.Widget {
 	buttons := buttonList()
-	return dom.Style(corebase.PkgFile("popup.scss"))(
-		dom.Div(dom.Id("pkg")).Children(
-			dom.PopupContainer(dom.Div(dom.Class("panel")).Children(buildItems(buttons)...)),
-			dom.Spacer(),
-			dom.PopupContainer(dom.Div(dom.Class("panel")).Children(buildItems(buttons)...)),
-		),
+	stylesheets := dom.UseStylesheet(node, corebase.PkgFile("popup.scss"))
+	return dom.Div(dom.Stylesheets(stylesheets), dom.Id("pkg")).Children(
+		dom.PopupContainer(dom.Div(dom.Class("panel")).Children(buildItems(buttons)...)),
+		dom.Spacer(),
+		dom.PopupContainer(dom.Div(dom.Class("panel")).Children(buildItems(buttons)...)),
 	)
 })

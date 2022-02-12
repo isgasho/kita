@@ -28,7 +28,6 @@ func main() {
 	if lang := os.Getenv("UI_LANG"); lang != "" {
 		a.SetLanguage(lang)
 	}
-
 	var size coregeom.Point
 	if s := envs.Get("WINDOW_SIZE"); s != "" {
 		fmt.Sscanf(s, "%fx%f", &size.X, &size.Y)
@@ -43,7 +42,6 @@ func main() {
 	}
 	resizable := envs.GetBool("WINDOW_RESIZABLE", true)
 	borderless := envs.GetBool("WINDOW_BORDERLESS")
-
 	_ = profileStop
 	a.OnDestroy(func() {
 		profileStop.SafeCancel()

@@ -145,10 +145,9 @@ var _App = corewidget.PComponent("App", func(node corewidget.ComponentNode, modu
 	//	),
 	//}
 
-	return dom.Style(corebase.PkgFile("app.scss"))(
-		dom.Div(dom.Id("app")).Children(
-			children...,
-		),
+	stylesheets := dom.UseStylesheet(node, corebase.PkgFile("app.scss"))
+	return dom.Div(dom.Id("app"), dom.Stylesheets(stylesheets)).Children(
+		children...,
 	)
 })
 

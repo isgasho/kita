@@ -98,14 +98,13 @@ var App = corewidget.Component("Menu", func(node corewidget.ComponentNode) corew
 		onAction("menubar", action)
 	})
 
-	return dom.Style(corebase.PkgFile("menu.scss"))(
-		dom.Div().Children(
-			dom.Label(dom.LabelText(text)),
-			dom.Button(
-				menu.AttrSecondaryTapContextMenu(buildContextMenu, func(action string) {
-					onAction("contextMenu", action)
-				}),
-			).Child(dom.Label(dom.LabelText("show context menu"))),
-		),
+	stylesheets := dom.UseStylesheet(node, corebase.PkgFile("menu.scss"))
+	return dom.Div(dom.Stylesheets(stylesheets)).Children(
+		dom.Label(dom.LabelText(text)),
+		dom.Button(
+			menu.AttrSecondaryTapContextMenu(buildContextMenu, func(action string) {
+				onAction("contextMenu", action)
+			}),
+		).Child(dom.Label(dom.LabelText("show context menu"))),
 	)
 })

@@ -176,11 +176,10 @@ var App = corewidget.Component("FileBrowser",
 	func(node corewidget.ComponentNode) corewidget.Widget {
 		corewidget.UseBuilder(node, newBrowserState)
 
-		return dom.Style(corebase.PkgFile("browser.scss"))(
-			dom.Div(dom.Id("pkg")).Children(
-				appSidebar(),
-				appContent(),
-			),
+		stylesheets := dom.UseStylesheet(node, corebase.PkgFile("browser.scss"))
+		return dom.Div(dom.Stylesheets(stylesheets), dom.Id("pkg")).Children(
+			appSidebar(),
+			appContent(),
 		)
 	},
 )

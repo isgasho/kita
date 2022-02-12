@@ -64,23 +64,22 @@ var App = corewidget.Component("Hotkey", func(node corewidget.ComponentNode) cor
 
 	errorMsg := corert.Conditional(supportHotkey, "", "hotkey service not available")
 
-	return dom.Style(corebase.PkgFile("hotkey.scss"))(
-		dom.Div(dom.Id("pkg")).Compose(func(emit corewidget.ComposeEmitFunc) {
-			if errorMsg != "" {
-				dom.Label(dom.LabelText(errorMsg)).Emit(emit)
-			}
-			dom.Div(dom.Id("actions")).Children(
-				dom.Button(
-					dom.OnTap(func(ele coredom.Element, details recognizers.TapDetails) {
-						enableCtrlD.Set(!enableCtrlD.Get())
-					}),
-				).Child(dom.Label(dom.LabelText(disableOrEnable(enableCtrlD.Get())+" Ctrl+D to show/hide window"))),
-				dom.Button(
-					dom.OnTap(func(ele coredom.Element, details recognizers.TapDetails) {
-						enableF1.Set(!enableF1.Get())
-					}),
-				).Child(dom.Label(dom.LabelText(disableOrEnable(enableF1.Get())+" F1 to show/hide window"))),
-			).Emit(emit)
-		}),
-	)
+	stylesheets := dom.UseStylesheet(node, corebase.PkgFile("hotkey.scss"))
+	return dom.Div(dom.Stylesheets(stylesheets), dom.Id("pkg")).Compose(func(emit corewidget.ComposeEmitFunc) {
+		if errorMsg != "" {
+			dom.Label(dom.LabelText(errorMsg)).Emit(emit)
+		}
+		dom.Div(dom.Id("actions")).Children(
+			dom.Button(
+				dom.OnTap(func(ele coredom.Element, details recognizers.TapDetails) {
+					enableCtrlD.Set(!enableCtrlD.Get())
+				}),
+			).Child(dom.Label(dom.LabelText(disableOrEnable(enableCtrlD.Get())+" Ctrl+D to show/hide window"))),
+			dom.Button(
+				dom.OnTap(func(ele coredom.Element, details recognizers.TapDetails) {
+					enableF1.Set(!enableF1.Get())
+				}),
+			).Child(dom.Label(dom.LabelText(disableOrEnable(enableF1.Get())+" F1 to show/hide window"))),
+		).Emit(emit)
+	})
 })

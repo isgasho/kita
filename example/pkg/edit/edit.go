@@ -91,29 +91,30 @@ var App = corewidget.Component("Edit",
 			loadFile(paths[0])
 			return true
 		})
+		stylesheets := dom.UseStylesheet(node, corebase.PkgFile("edit.scss"))
+		return dom.Div(
+			dom.Stylesheets(stylesheets),
+			dom.Id("pkg"),
+		).Children(
+			dom.Div(dom.Id("dialog-actions")).Children(
+				dom.Button(
+					dom.Class("dialog-action"),
+					dom.OnTap(onFileOpen),
+				).Child(dom.Label(dom.LabelText("Open"))),
 
-		return dom.Style(corebase.PkgFile("edit.scss"))(
-			dom.Div(dom.Id("pkg")).Children(
-				dom.Div(dom.Id("dialog-actions")).Children(
-					dom.Button(
-						dom.Class("dialog-action"),
-						dom.OnTap(onFileOpen),
-					).Child(dom.Label(dom.LabelText("Open"))),
+				dom.Button(
+					dom.Class("dialog-action"),
+					dom.OnTap(onFileSave),
+				).Child(dom.Label(dom.LabelText("Save"))),
 
-					dom.Button(
-						dom.Class("dialog-action"),
-						dom.OnTap(onFileSave),
-					).Child(dom.Label(dom.LabelText("Save"))),
+				dom.Label(dom.LabelText(message.Get())),
+			),
 
-					dom.Label(dom.LabelText(message.Get())),
-				),
-
-				dom.TextArea(
-					dom.OnDragDrop(dragDropHandler),
-					dom.TextAreaPlaceholder("File Content(support drag drop file here)"),
-					dom.TextAreaValue(text.Get()),
-					dom.TextAreaOnChange(text.Set),
-				),
+			dom.TextArea(
+				dom.OnDragDrop(dragDropHandler),
+				dom.TextAreaPlaceholder("File Content(support drag drop file here)"),
+				dom.TextAreaValue(text.Get()),
+				dom.TextAreaOnChange(text.Set),
 			),
 		)
 	},

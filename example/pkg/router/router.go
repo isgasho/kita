@@ -37,7 +37,7 @@ func randText() string {
 	return base64.StdEncoding.EncodeToString(b)
 }
 
-func App() corewidget.Widget {
+var App = corewidget.Component("App", func(node corewidget.ComponentNode) corewidget.Widget {
 	routeColor := "/color"
 	routeText := "/text"
 	actions := func(state router.State, route router.RouteBuildInfo) []corewidget.Widget {
@@ -98,17 +98,17 @@ func App() corewidget.Widget {
 			},
 		},
 	}
+
+	stylesheets := dom.UseStylesheet(node, corebase.PkgFile("router.scss"))
 	return router.Router(
 		routes.Build,
 		func(state router.State, info router.RouteBuildInfo, routerView corewidget.Widget) corewidget.Widget {
-			return dom.Style(corebase.PkgFile("router.scss"))(
-				dom.Div(dom.Id("pkg")).Children(
-					dom.Div(dom.Id("router-view")).Children(routerView),
-					dom.Div(dom.Id("router-actions")).Children(
-						actions(state, info)...,
-					),
+			return dom.Div(dom.Stylesheets(stylesheets), dom.Id("pkg")).Children(
+				dom.Div(dom.Id("router-view")).Children(routerView),
+				dom.Div(dom.Id("router-actions")).Children(
+					actions(state, info)...,
 				),
 			)
 		},
 	)
-}
+})

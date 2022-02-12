@@ -50,13 +50,13 @@ var transparentPanel = corewidget.PComponent("TransparentPanel", func(node corew
 })
 
 var transparentWindow = corewidget.Component("TransparentWindow", func(node corewidget.ComponentNode) corewidget.Widget {
-	return dom.Style(corebase.PkgFile("window.scss"))(
-		dom.Div(
-			dom.Id("transparent"),
-		).Children(
-			transparentPanel(0.3),
-			transparentPanel(0.7),
-		),
+	stylesheets := dom.UseStylesheet(node, corebase.PkgFile("window.scss"))
+	return dom.Div(
+		dom.Stylesheets(stylesheets),
+		dom.Id("transparent"),
+	).Children(
+		transparentPanel(0.3),
+		transparentPanel(0.7),
 	)
 })
 
@@ -81,22 +81,21 @@ func createTransparentWindow(application *app.App) {
 var dynamicSizeWindow = corewidget.Component("DynamicSizeWindow", func(node corewidget.ComponentNode) corewidget.Widget {
 	number := corewidget.UseValue[texts.Text](node, texts.Runes{})
 
-	return dom.Style(corebase.PkgFile("window.scss"))(
-		dom.Div(dom.Id("dynamic-size")).Children(
-			dom.Input(
-				dom.Autofocus(true),
-				dom.InputType(services.TextInputTypeNumber),
-				dom.InputValue(number.Get()),
-				dom.InputOnChange(number.Set),
-				dom.InputPlaceholder("type a number, show items with count N%30"),
-			),
-			dom.Div(dom.Id("dropdown")).Compose(func(emit corewidget.ComposeEmitFunc) {
-				n, _ := strconv.Atoi(string(texts.CopyTextDataAsString(number.Get())))
-				for i := 0; i < n%30; i++ {
-					emit(dom.Label(dom.Class("dropdown-item"), dom.LabelText(strconv.Itoa(i+n))))
-				}
-			}),
+	stylesheets := dom.UseStylesheet(node, corebase.PkgFile("window.scss"))
+	return dom.Div(dom.Id("dynamic-size"), dom.Stylesheets(stylesheets)).Children(
+		dom.Input(
+			dom.Autofocus(true),
+			dom.InputType(services.TextInputTypeNumber),
+			dom.InputValue(number.Get()),
+			dom.InputOnChange(number.Set),
+			dom.InputPlaceholder("type a number, show items with count N%30"),
 		),
+		dom.Div(dom.Id("dropdown")).Compose(func(emit corewidget.ComposeEmitFunc) {
+			n, _ := strconv.Atoi(string(texts.CopyTextDataAsString(number.Get())))
+			for i := 0; i < n%30; i++ {
+				emit(dom.Label(dom.Class("dropdown-item"), dom.LabelText(strconv.Itoa(i+n))))
+			}
+		}),
 	)
 })
 
@@ -132,14 +131,13 @@ var sizeLimitWindow = corewidget.Component("SizeLimitWindow", func(node corewidg
 		}
 	}
 	menu.UseWindowMenubar(node, menubar, func(action string) {})
-	return dom.Style(corebase.PkgFile("window.scss"))(
-		dom.Div(dom.Id("size-limit")).Children(
-			dom.Button(dom.OnTap(func(ele coredom.Element, details recognizers.TapDetails) {
-				enable.Set(!enable.Get())
-			})).Child(dom.Label(dom.LabelText("toggle menubar"))),
-			dom.Label(
-				dom.LabelText("size: 200 ~ 400, default 300"),
-			),
+	stylesheets := dom.UseStylesheet(node, corebase.PkgFile("window.scss"))
+	return dom.Div(dom.Id("size-limit"), dom.Stylesheets(stylesheets)).Children(
+		dom.Button(dom.OnTap(func(ele coredom.Element, details recognizers.TapDetails) {
+			enable.Set(!enable.Get())
+		})).Child(dom.Label(dom.LabelText("toggle menubar"))),
+		dom.Label(
+			dom.LabelText("size: 200 ~ 400, default 300"),
 		),
 	)
 })
@@ -162,7 +160,7 @@ func createSizeLimitedWindow(application *app.App) {
 	})
 }
 
-func modalWindowContent() corewidget.Widget {
+var modalWindowContent = corewidget.Component("ModalWindow", func(node corewidget.ComponentNode) corewidget.Widget {
 	onWindowKey := func(ctx coreevent.PropagateContext, ele coredom.Element, key coreevent.KeyEvent) {
 		var window *app.Window
 		coreui.GetModuleInto(ele.View(), &window)
@@ -175,17 +173,17 @@ func modalWindowContent() corewidget.Widget {
 		}
 	}
 
-	return dom.Style(corebase.PkgFile("window.scss"))(
-		dom.Div(
-			dom.Id("modal"),
-			dom.OnWindowKey(onWindowKey),
-		).Children(
-			dom.Label(
-				dom.LabelText("modal window"),
-			),
+	stylesheets := dom.UseStylesheet(node, corebase.PkgFile("window.scss"))
+	return dom.Div(
+		dom.Stylesheets(stylesheets),
+		dom.Id("modal"),
+		dom.OnWindowKey(onWindowKey),
+	).Children(
+		dom.Label(
+			dom.LabelText("modal window"),
 		),
 	)
-}
+})
 
 func createModalWindow(application *app.App, window *app.Window) {
 	w, err := application.CreateWindow(
@@ -209,28 +207,27 @@ var App = corewidget.Component("Window", func(node corewidget.ComponentNode) cor
 	coreui.GetModuleInto(node.View(), &application)
 	coreui.GetModuleInto(node.View(), &window)
 
-	return dom.Style(corebase.PkgFile("window.scss"))(
-		dom.Div(dom.Id("pkg")).Children(
-			dom.Button(
-				dom.OnTap(func(_ coredom.Element, _ recognizers.TapDetails) {
-					createTransparentWindow(application)
-				}),
-			).Child(dom.Label(dom.LabelText("create transparent window"))),
-			dom.Button(
-				dom.OnTap(func(_ coredom.Element, _ recognizers.TapDetails) {
-					createDynamicSizeWindow(application)
-				}),
-			).Child(dom.Label(dom.LabelText("create dynamic size window"))),
-			dom.Button(
-				dom.OnTap(func(_ coredom.Element, _ recognizers.TapDetails) {
-					createSizeLimitedWindow(application)
-				}),
-			).Child(dom.Label(dom.LabelText("create size limited window"))),
-			dom.Button(
-				dom.OnTap(func(_ coredom.Element, _ recognizers.TapDetails) {
-					createModalWindow(application, window)
-				}),
-			).Child(dom.Label(dom.LabelText("create modal window"))),
-		),
+	stylesheets := dom.UseStylesheet(node, corebase.PkgFile("window.scss"))
+	return dom.Div(dom.Id("pkg"), dom.Stylesheets(stylesheets)).Children(
+		dom.Button(
+			dom.OnTap(func(_ coredom.Element, _ recognizers.TapDetails) {
+				createTransparentWindow(application)
+			}),
+		).Child(dom.Label(dom.LabelText("create transparent window"))),
+		dom.Button(
+			dom.OnTap(func(_ coredom.Element, _ recognizers.TapDetails) {
+				createDynamicSizeWindow(application)
+			}),
+		).Child(dom.Label(dom.LabelText("create dynamic size window"))),
+		dom.Button(
+			dom.OnTap(func(_ coredom.Element, _ recognizers.TapDetails) {
+				createSizeLimitedWindow(application)
+			}),
+		).Child(dom.Label(dom.LabelText("create size limited window"))),
+		dom.Button(
+			dom.OnTap(func(_ coredom.Element, _ recognizers.TapDetails) {
+				createModalWindow(application, window)
+			}),
+		).Child(dom.Label(dom.LabelText("create modal window"))),
 	)
 })
