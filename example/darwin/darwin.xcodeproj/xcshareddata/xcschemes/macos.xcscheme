@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D9F2514E2752120B000E593E"
-               BuildableName = "macos.app"
+               BuildableName = "Example.app"
                BlueprintName = "macos"
                ReferencedContainer = "container:darwin.xcodeproj">
             </BuildableReference>
@@ -31,7 +31,7 @@
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D9F2514E2752120B000E593E"
-            BuildableName = "macos.app"
+            BuildableName = "Example.app"
             BlueprintName = "macos"
             ReferencedContainer = "container:darwin.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D9F2514E2752120B000E593E"
-            BuildableName = "macos.app"
+            BuildableName = "Example.app"
             BlueprintName = "macos"
             ReferencedContainer = "container:darwin.xcodeproj">
          </BuildableReference>

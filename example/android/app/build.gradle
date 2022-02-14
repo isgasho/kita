@@ -28,7 +28,7 @@ android {
 }
 apply from: "uikit android gradle-plugin".execute().text + "/project.gradle"
 uikit {
-   debugArchs = ["x86_64"]
+//   debugArchs = ["x86_64"]
     // debugArchs = ["arm64-v8a"]
 }
 dependencies {

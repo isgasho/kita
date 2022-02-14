@@ -152,6 +152,11 @@ func (s *appState) initTray() {
 				s.trayWindow.OnDestroy(func() {
 					s.trayWindow = nil
 				})
+				w.OnFocusChange(func(focus bool) {
+					if !focus {
+						w.SetVisible(false)
+					}
+				})
 			}
 		} else {
 			s.trayWindow.SetVisible(!s.trayWindow.State().Visible)
@@ -208,15 +213,8 @@ func (s *appState) trayDestroy() {
 }
 
 var _TrayWindow = corewidget.Component("TrayWindow", func(node corewidget.ComponentNode) corewidget.Widget {
-	focusChange, currState := corewidget.UseSettingsChange(node, func(old, curr coreui.WindowState) bool {
-		return old.Focused != curr.Focused
-	})
-	if focusChange && !currState.Focused {
-		w, _ := coreui.GetModule[*app.Window](node.View())
-		w.SetVisible(false)
-	}
-
 	stylesheets := dom.UseStylesheet(node, corebase.PkgFile("window.scss"))
+	state := corewidget.UseSettings[coreui.WindowState](node)
 	return dom.Div(
 		dom.Stylesheets(stylesheets),
 		dom.OnWindowShortcut(func() []coreevent.Shortcut {
@@ -225,7 +223,9 @@ var _TrayWindow = corewidget.Component("TrayWindow", func(node corewidget.Compon
 			w, _ := coreui.GetModule[*app.Window](node.View())
 			w.SetVisible(false)
 		}),
-	).Children(dom.Span(dom.SpanText("popup window here")))
+	).Children(
+		dom.Span(dom.SpanText(fmt.Sprintf("popup window here, focused: %t", state.Focused))),
+	)
 })
 
 var App = corewidget.Component("Tray", func(node corewidget.ComponentNode) corewidget.Widget {
